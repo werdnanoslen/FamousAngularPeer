@@ -8,13 +8,8 @@ angular.module('famousAngularStarter',
       .state('home', {
         url: '/',
         templateUrl: 'partials/main.html',
-        controller: 'MainCtrl'
+        controller: 'DraggableCtrl'
       })
-      .state('jade', {
-        url: '/jade',
-        templateUrl: 'partials/jade.html',
-        controller: 'MainCtrl'
-      });
 
     $urlRouterProvider.otherwise('/');
   })

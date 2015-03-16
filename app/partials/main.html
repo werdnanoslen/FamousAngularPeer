@@ -1,25 +1,30 @@
-<fa-app class="full-screen">
+<fa-app>
 
-  <!-- Container modifier, which we're rotating over the y axis -->
-  <fa-modifier fa-origin="[.5, .5]" fa-align="[.5, .5]" fa-rotate-y="rotateY.get()">
+  <fa-modifier ng-repeat="node in nodes"  fa-translate="node.position" fa-size="[300, 300]">
+    <fa-draggable fa-pipe-from="node.handler">
+      <fa-surface fa-background-color="'red'" fa-size="[undefined, undefined]" fa-pipe-to="node.handler">
+        <!-- Video area -->
+        <video id="their-video" autoplay width="100%"></video>
+        <video id="my-video" muted="true" autoplay width="100%"></video>
 
-    <!-- Front face -->
-    <fa-surface fa-size="[true, true]" fa-color="'rgb(255,255,250)'">
-      <img class="logo" src="images/famous-logo.svg" style="width: 200px; height: 200px;"/>
-    </fa-surface>
+        <!-- Make calls to others -->
+        <div id="step2">
+          <p>Your id: {{yourId}}</p>
+          <p>Share this id with others so they can call you.</p>
+          <h3>Make a call</h3>
+          <div class="pure-form">
+            <input type="text" placeholder="Call user id..." ng-model="calltoId">
+            <a href="#" class="pure-button pure-button-success" ng-click="makeCall()">Call</a>
+          </div>
+        </div>
 
-    <!-- Back face:  same image, rotated pi radians -->
-    <fa-modifier fa-rotate-y="3.14159">
-      <fa-surface fa-size="[true, true]" fa-color="'rgb(255,255,250)'">
-        <img class="logo" src="images/famous-logo.svg" style="width: 200px; height: 200px;" />
+        <!-- Call in progress -->
+        <div id="step3">
+          <p>Currently in call with {{theirId}}</p>
+          <p><a href="#" class="pure-button pure-button-error" ng-click="endCall()">End call</a></p>
+        </div>
       </fa-surface>
-    </fa-modifier>
-
+    </fa-draggable>
   </fa-modifier>
 
-  <fa-modifier fa-origin="[.5, .9]" fa-align="[.5, .9]" fa-size="[200, 100]">
-    <fa-surface>
-      <input style="width: 100%; text-align: center;" type="range" min="10" max="100" ng-model="spinner.speed" />
-    </fa-surface>
-  </fa-modifier>
 </fa-app>
